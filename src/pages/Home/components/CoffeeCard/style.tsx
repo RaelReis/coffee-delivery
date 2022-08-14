@@ -25,16 +25,6 @@ export const CoffeInfoBox = styled.div`
   align-items: center;
   margin-top: 1.2rem;
 
-  & > span {
-    background-color: ${(props) => props.theme['yellow-100']};
-    color: ${(props) => props.theme['yellow-600']};
-    font-weight: bold;
-    font-size: 1rem;
-    text-transform: uppercase;
-    padding: 0.4rem 0.8rem;
-    border-radius: 100px;
-  }
-
   h3 {
     font-size: 2rem;
     font-family: 'Baloo 2', cursive;
@@ -50,6 +40,23 @@ export const CoffeInfoBox = styled.div`
     line-height: 1.4;
     color: ${(props) => props.theme['base-label']};
     text-align: center;
+  }
+`
+
+export const TagsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  & > span {
+    background-color: ${(props) => props.theme['yellow-100']};
+    color: ${(props) => props.theme['yellow-600']};
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
   }
 `
 

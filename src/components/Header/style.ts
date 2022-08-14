@@ -1,4 +1,16 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const gorwingCircle = keyframes`
+  0% {
+    transform: scale(.5)
+  }
+  50% {
+    transform: scale(1.2)
+  }
+  100% {
+    transform: scale(1)
+  }
+`
 
 export const HeaderContainer = styled.header`
   position: fixed;
@@ -16,6 +28,10 @@ export const HeaderBox = styled.div`
   width: calc(100% - 32rem);
   margin-inline: auto;
   padding: 3.2rem 0;
+
+  img {
+    width: 8rem;
+  }
 `
 
 export const CartWrapper = styled.div`
@@ -66,4 +82,6 @@ export const CartNumber = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  animation: ${gorwingCircle} 0.4s ease;
 `

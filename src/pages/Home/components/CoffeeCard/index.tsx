@@ -1,38 +1,23 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { RequestContext } from '../../../../contexts/requestContext'
+import { Coffee } from '../../../../utils/coffeeData'
 import {
   CoffeBuyBox,
   CoffeInfoBox,
   ConfeeCardContainer,
   QuantityNumber,
+  TagsWrapper,
 } from './style'
 
-type Tag = 'tradicional' | 'gelado' | 'com-leite' | 'especial' | 'alcoólico'
-
 interface CoffeeCardProps {
-  name: string
-  description: string
-  price: number
-  tag: Tag
-  imgUrl: string
+  data: Coffee
 }
 
-const tagTypes = {
-  tradicional: 'Tradicional',
-  gelado: 'Gelado',
-  'com-leite': 'Com Leite',
-  especial: 'ESpecial',
-  alcoólico: 'alcoólico',
-} as const
-
-export function CoffeeCard({
-  name,
-  description,
-  price,
-  tag,
-  imgUrl,
-}: CoffeeCardProps) {
+export function CoffeeCard({ data }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(1)
+
+  const { updateCartFromCoffeeRequest } = useContext(RequestContext)
 
   function imcrementQuantity() {
     quantity >= 1 && setQuantity((prev) => prev + 1)
@@ -42,14 +27,25 @@ export function CoffeeCard({
     quantity > 1 && setQuantity((prev) => prev - 1)
   }
 
+  function handleAddCoffee() {
+    updateCartFromCoffeeRequest(data, quantity)
+  }
+
   return (
     <ConfeeCardContainer>
-      <img src={imgUrl} alt={name} />
+      <img src={data.imageUrl} alt={data.name} />
+
       <CoffeInfoBox>
-        <span>{tagTypes[tag]}</span>
-        <h3>{name}</h3>
-        <p>{description}</p>
+        <TagsWrapper>
+          {data.tags.map((tag) => (
+            <span key={tag.id}>{tag.name}</span>
+          ))}
+        </TagsWrapper>
+
+        <h3>{data.name}</h3>
+        <p>{data.description}</p>
       </CoffeInfoBox>
+
       <CoffeBuyBox>
         <span>
           R$ <span>9,99</span>
@@ -63,7 +59,7 @@ export function CoffeeCard({
             <Plus size={15} weight="bold" />
           </button>
         </div>
-        <button>
+        <button onClick={handleAddCoffee}>
           <ShoppingCart size={25} weight="fill" />
         </button>
       </CoffeBuyBox>
