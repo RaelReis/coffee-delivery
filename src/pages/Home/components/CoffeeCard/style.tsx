@@ -109,6 +109,10 @@ export const CoffeBuyBox = styled.div`
     background-color: ${(props) => props.theme['purple-600']};
     border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  & > button:hover {
+    background-color: ${(props) => props.theme['purple-300']};
   }
 `
 

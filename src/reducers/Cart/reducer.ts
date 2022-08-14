@@ -1,35 +1,34 @@
-import { RequestCoffe } from '../../contexts/requestContext'
+import { RequestCoffee, RequestCart } from '../../contexts/requestContext'
 import { produce } from 'immer'
 import { ActionTypes } from './action'
 
 interface Action {
   type: string
-  payload: RequestCoffe
+  payload: RequestCoffee
 }
 
-export function cartReducer(state: RequestCoffe[], action: Action) {
+export function cartReducer(state: RequestCart, action: Action) {
   switch (action.type) {
     case ActionTypes.ADD_TO_CART: {
-      console.log(state)
-      const alreadyAddedCoffe = state.findIndex(
+      const alreadyAddedCoffe = state.cart.findIndex(
         (coffeeReq) => coffeeReq.coffee.id === action.payload.coffee.id,
       )
 
       return produce(state, (draft) => {
         if (alreadyAddedCoffe > -1) {
-          draft.map((coffeeReq) => {
+          draft.cart.map((coffeeReq) => {
             if (coffeeReq.coffee.id === action.payload.coffee.id) {
               return (coffeeReq.quantity += action.payload.quantity)
             }
             return coffeeReq
           })
+          draft.total += action.payload.coffee.price * action.payload.quantity
         } else {
-          draft.push(action.payload)
+          draft.cart.push(action.payload)
+          draft.total += action.payload.coffee.price * action.payload.quantity
         }
       })
     }
-    case ActionTypes.REMOVE_FROM_CART:
-      return state.filter((item) => item.coffee.id !== action.payload.coffee.id)
     default:
       return state
   }
