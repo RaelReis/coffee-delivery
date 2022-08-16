@@ -21,8 +21,8 @@ export function Header() {
             Porto Alegre, RS
           </span>
           <NavLink to="checkout">
-            {cart && cart.total > 0 && (
-              <CartNumber key={cart.total}>{cart.cart.length}</CartNumber>
+            {cart && cart.requests.length > 0 && (
+              <CartNumber key={cart.total}>{cart.requests.length}</CartNumber>
             )}
             <ShoppingCart size={25} weight="fill" />
           </NavLink>

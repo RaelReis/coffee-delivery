@@ -8,12 +8,13 @@ interface RequestProviderProps {
 }
 
 export type RequestCoffee = {
+  id: string
   coffee: Coffee
   quantity: number
 }
 
 export type RequestCart = {
-  cart: RequestCoffee[]
+  requests: RequestCoffee[]
   total: number
 }
 
@@ -25,7 +26,7 @@ interface RequestContextProps {
 export const RequestContext = createContext({} as RequestContextProps)
 
 export function RequestProvider({ children }: RequestProviderProps) {
-  const [cart, dispatch] = useReducer(cartReducer, { cart: [], total: 0 })
+  const [cart, dispatch] = useReducer(cartReducer, { requests: [], total: 0 })
 
   function updateCartFromCoffeeRequest(coffeInfo: Coffee, quantity: number) {
     dispatch(updateCartFromCoffeeRequestAction(coffeInfo, quantity))

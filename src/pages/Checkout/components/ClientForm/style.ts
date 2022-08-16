@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const ClientInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
 `
 
 const ClientFormBoxHeader = styled.div`
