@@ -8,7 +8,7 @@ interface Action {
   payload: RequestCoffee
 }
 
-function calcTotalItemPriceByQuantity(draft: WritableDraft<RequestCart>) {
+function calcTotalPriceByItens(draft: WritableDraft<RequestCart>) {
   return draft.requests.reduce((total, coffee) => {
     return (total += coffee.quantity * coffee.coffee.price)
   }, 0)
@@ -24,12 +24,12 @@ export function cartReducer(state: RequestCart, action: Action) {
         if (alreadyAddedCoffeIndex > -1) {
           draft.requests[alreadyAddedCoffeIndex].quantity +=
             action.payload.quantity
-          draft.total = calcTotalItemPriceByQuantity(draft)
+          draft.total = calcTotalPriceByItens(draft)
           return
         }
 
         draft.requests.push(action.payload)
-        draft.total = calcTotalItemPriceByQuantity(draft)
+        draft.total = calcTotalPriceByItens(draft)
       })
     }
     default:
