@@ -33,7 +33,7 @@ const ClientFormBox = styled.div`
 export const AdressBox = styled(ClientFormBox)``
 
 export const AddressHeader = styled(ClientFormBoxHeader)`
-  svg {
+  & > svg {
     color: ${(props) => props.theme['yellow-600']};
   }
 `
@@ -48,7 +48,7 @@ export const InputsWrapper = styled.div`
     'bairro cidade uf';
   gap: 1.6rem 1.2rem;
 
-  input {
+  & > input {
     padding: 1.2rem;
     border-radius: 4px;
     background-color: ${(props) => props.theme['base-input']};
@@ -58,7 +58,7 @@ export const InputsWrapper = styled.div`
     line-height: 1.3;
   }
 
-  input:focus {
+  & > input:focus {
     border-color: ${(props) => props.theme['yellow-600']};
   }
 
@@ -95,7 +95,7 @@ export const InputsWrapper = styled.div`
 export const PaymentBox = styled(ClientFormBox)``
 
 export const PaymentHeader = styled(ClientFormBoxHeader)`
-  svg {
+  & > svg {
     color: ${(props) => props.theme['purple-600']};
   }
 `
@@ -105,7 +105,7 @@ export const PaymentContent = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1.2rem;
 
-  button {
+  & > button {
     display: flex;
     align-items: center;
     gap: 1.2rem;
@@ -125,7 +125,7 @@ export const PaymentContent = styled.div`
     }
   }
 
-  button:hover {
+  & > button:hover {
     background-color: ${(props) => props.theme['base-hover']};
   }
 `

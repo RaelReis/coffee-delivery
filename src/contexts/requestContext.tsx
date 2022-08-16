@@ -1,5 +1,9 @@
 import { createContext, ReactNode, useReducer } from 'react'
-import { updateCartFromCoffeeRequestAction } from '../reducers/Cart/action'
+import {
+  updateCartFromCoffeeRequestAction,
+  updateQuantityItemAction,
+  removeItemFromCartAction,
+} from '../reducers/Cart/action'
 import { cartReducer } from '../reducers/Cart/reducer'
 import { Coffee } from '../utils/coffeeData'
 
@@ -8,7 +12,7 @@ interface RequestProviderProps {
 }
 
 export type RequestCoffee = {
-  id: string
+  id?: string
   coffee: Coffee
   quantity: number
 }
@@ -21,6 +25,12 @@ export type RequestCart = {
 interface RequestContextProps {
   cart: RequestCart
   updateCartFromCoffeeRequest: (coffeInfo: Coffee, quantity: number) => void
+  updateItemQuantity: (coffeInfo: Coffee, quantity: number) => void
+  removeItemFromCart: (
+    requestId: string,
+    coffeeId: Coffee,
+    quantity: number,
+  ) => void
 }
 
 export const RequestContext = createContext({} as RequestContextProps)
@@ -32,8 +42,27 @@ export function RequestProvider({ children }: RequestProviderProps) {
     dispatch(updateCartFromCoffeeRequestAction(coffeInfo, quantity))
   }
 
+  function updateItemQuantity(coffeInfo: Coffee, newQuantity: number) {
+    dispatch(updateQuantityItemAction(coffeInfo, newQuantity))
+  }
+
+  function removeItemFromCart(
+    requestId: string,
+    coffeInfo: Coffee,
+    newQuantity: number,
+  ) {
+    dispatch(removeItemFromCartAction(requestId, coffeInfo, newQuantity))
+  }
+
   return (
-    <RequestContext.Provider value={{ cart, updateCartFromCoffeeRequest }}>
+    <RequestContext.Provider
+      value={{
+        cart,
+        updateCartFromCoffeeRequest,
+        updateItemQuantity,
+        removeItemFromCart,
+      }}
+    >
       {children}
     </RequestContext.Provider>
   )

@@ -9,6 +9,11 @@ import { useContext } from 'react'
 export function Header() {
   const { cart } = useContext(RequestContext)
 
+  const cartTotalItems = cart.requests.reduce(
+    (acc, curr) => acc + curr.quantity,
+    0,
+  )
+
   return (
     <HeaderContainer>
       <HeaderBox>
@@ -21,8 +26,8 @@ export function Header() {
             Porto Alegre, RS
           </span>
           <NavLink to="checkout">
-            {cart && cart.requests.length > 0 && (
-              <CartNumber key={cart.total}>{cart.requests.length}</CartNumber>
+            {cartTotalItems > 0 && (
+              <CartNumber key={cartTotalItems}>{cartTotalItems}</CartNumber>
             )}
             <ShoppingCart size={25} weight="fill" />
           </NavLink>

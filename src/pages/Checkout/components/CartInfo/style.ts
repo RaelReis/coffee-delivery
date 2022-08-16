@@ -21,7 +21,7 @@ export const CartInfoBox = styled.div`
   display: flex;
   flex-direction: column;
 
-  button {
+  & > button {
     margin-top: 2.4rem;
     border-radius: 6px;
     background-color: ${(props) => props.theme['yellow-300']};
@@ -35,7 +35,7 @@ export const CartInfoBox = styled.div`
     transition: background-color 0.2s;
   }
 
-  button:hover {
+  & > button:hover {
     background-color: ${(props) => props.theme['yellow-600']};
   }
 `
@@ -47,6 +47,16 @@ export const CartList = styled.ul`
 
   max-height: 38.5rem;
   overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 1rem;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme['yellow-300']};
+    border-radius: 10px;
+  }
 `
 
 export const PriceInfoBox = styled.div`
@@ -67,7 +77,7 @@ export const PriceInfo = styled.div`
     line-height: 1.3;
   }
 
-  span + span {
+  & > span + span {
     font-size: 1.6rem;
     line-height: 1.3;
   }
@@ -78,7 +88,7 @@ export const TotalInfo = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  span {
+  & > span {
     font-size: 2rem;
     font-weight: bold;
     line-height: 1.3;
