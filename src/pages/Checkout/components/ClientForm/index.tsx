@@ -15,7 +15,31 @@ import {
   PaymentHeader,
 } from './style'
 
+import InputMask from 'react-input-mask'
+import { useEffect } from 'react'
+import { useFormContext } from 'react-hook-form'
+import axios from 'axios'
+
 export function ClientForm() {
+  const { register, watch, setValue, formState } = useFormContext()
+
+  const cep = watch('cep', '')
+
+  useEffect(() => {
+    ;(async function () {
+      if (cep.length === 9) {
+        const { data } = await axios.get(
+          `https://viacep.com.br/ws/${cep}/json/`,
+        )
+        if (data.erro) return
+        setValue('rua', data.logradouro)
+        setValue('bairro', data.bairro)
+        setValue('cidade', data.localidade)
+        setValue('uf', data.uf)
+      }
+    })()
+  }, [cep, setValue])
+
   return (
     <ClientInfoContainer>
       <h2>Complete seu pedido</h2>
@@ -29,13 +53,48 @@ export function ClientForm() {
           </div>
         </AddressHeader>
         <InputsWrapper>
-          <input id="cep" type="text" placeholder="CEP" />
-          <input id="rua" type="text" placeholder="Rua" />
-          <input id="numero" type="text" placeholder="Número" />
-          <input id="complemento" type="text" placeholder="Complemento" />
-          <input id="bairro" type="text" placeholder="Bairro" />
-          <input id="cidade" type="text" placeholder="Cidade" />
-          <input id="uf" type="text" placeholder="UF" />
+          <InputMask
+            mask="99999-999"
+            id="cep"
+            type="text"
+            placeholder="CEP"
+            maskChar={null}
+            {...register('cep')}
+          />
+          <input
+            id="rua"
+            type="text"
+            placeholder="Rua"
+            disabled
+            {...register('rua')}
+          />
+          <input
+            id="numero"
+            type="text"
+            placeholder="Número"
+            {...register('numero')}
+          />
+          <input
+            id="complemento"
+            type="text"
+            placeholder="Complemento"
+            {...register('complemento')}
+          />
+          <input
+            id="bairro"
+            type="text"
+            placeholder="Bairro"
+            disabled
+            {...register('bairro')}
+          />
+          <input
+            id="cidade"
+            type="text"
+            placeholder="Cidade"
+            disabled
+            {...register('cidade')}
+          />
+          <input id="uf" type="text" placeholder="UF" {...register('uf')} />
         </InputsWrapper>
       </AdressBox>
       {/* Payment box */}
