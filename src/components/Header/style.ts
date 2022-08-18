@@ -39,7 +39,7 @@ export const CartWrapper = styled.div`
   align-items: center;
   gap: 1.2rem;
 
-  & > span {
+  > span {
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -59,7 +59,7 @@ export const CartWrapper = styled.div`
     position: relative;
     transition: all 0.2s;
 
-    &:hover {
+    :hover {
       background-color: ${(props) => props.theme['yellow-300']};
     }
   }

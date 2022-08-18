@@ -67,7 +67,7 @@ export const CoffeBuyBox = styled.div`
   align-items: center;
   justify-content: center;
 
-  & > span {
+  > span {
     font-size: 1.4rem;
 
     span {
@@ -77,7 +77,7 @@ export const CoffeBuyBox = styled.div`
     }
   }
 
-  & > div {
+  > div {
     padding: 0.8rem;
     margin-left: 2.3rem;
     background-color: ${(props) => props.theme['base-button']};
@@ -101,7 +101,7 @@ export const CoffeBuyBox = styled.div`
     }
   }
 
-  & > button {
+  > button {
     color: ${(props) => props.theme['base-card']};
     line-height: 0;
     margin-left: 1.6rem;
@@ -111,7 +111,7 @@ export const CoffeBuyBox = styled.div`
     cursor: pointer;
     transition: background-color 0.2s;
   }
-  & > button:hover {
+  > button:hover {
     background-color: ${(props) => props.theme['purple-300']};
   }
 `

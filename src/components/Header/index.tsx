@@ -23,7 +23,7 @@ export function Header() {
         <CartWrapper>
           <span>
             <MapPin size={25} weight="fill" />
-            Porto Alegre, RS
+            São Paulo, SP
           </span>
           <NavLink to="checkout">
             {cartTotalItems > 0 && (

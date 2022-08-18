@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const CoffeeInfoCardContainer = styled.div`
+export const CoffeeInfoCardContainer = styled.li`
   display: flex;
 
   padding: 0.8rem 0.4rem 3.2rem 0.4rem;
@@ -16,7 +16,7 @@ export const CoffeeInfoCardContainer = styled.div`
     height: auto;
   }
 
-  & > span {
+  > span {
     margin-left: auto;
     color: ${(props) => props.theme['base-text']};
     line-height: 1.3;
@@ -61,10 +61,10 @@ export const QuantityBox = styled.div`
     color: ${(props) => props.theme['purple-300']};
     transition: color 0.2s ease;
     cursor: pointer;
-  }
 
-  button:hover {
-    color: ${(props) => props.theme['purple-600']};
+    :hover {
+      color: ${(props) => props.theme['purple-600']};
+    }
   }
 `
 
@@ -81,7 +81,7 @@ export const RemoveButton = styled.button`
   transition: background-color 0.2s;
   cursor: pointer;
 
-  &:hover {
+  :hover {
     background-color: ${(props) => props.theme['base-hover']};
   }
 

@@ -13,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     -webkit-font-smoothing: antialiased;
+
   }
 
   body {
@@ -20,6 +21,19 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.6rem;
     color: ${(props) => props.theme['base-text']};
     background: ${(props) => props.theme.background};
+
+    ::-webkit-scrollbar-track {
+      background: ${(props) => props.theme['base-card']};
+    }
+
+    ::-webkit-scrollbar {
+      width: 1rem;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${(props) => props.theme['yellow-300']};
+      border-radius: 10px;
+    }
   }
 
   button, input {

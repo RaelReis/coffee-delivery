@@ -60,7 +60,10 @@ export function CartInfo() {
             <button>Confiarmar pedido</button>
           </>
         ) : (
-          <EmptyCart>Você não tem nenhum item no carrinho.</EmptyCart>
+          <EmptyCart>
+            <span>Opa!</span>
+            <span>Você não tem nenhum item no carrinho.</span>
+          </EmptyCart>
         )}
       </CartInfoBox>
     </CardInfoContainer>

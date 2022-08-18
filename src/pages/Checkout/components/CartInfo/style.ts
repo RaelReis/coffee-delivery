@@ -95,9 +95,22 @@ export const TotalInfo = styled.div`
   }
 `
 export const EmptyCart = styled.span`
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1.3;
-  color: ${(props) => props.theme['base-text']};
+  > span {
+    display: block;
+    font-family: 'Baloo 2', cursive;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 1.3;
+    color: ${(props) => props.theme['yellow-300']};
+  }
+  span + span {
+    margin-top: 1rem;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.3;
+    color: ${(props) => props.theme['base-text']};
+  }
 `

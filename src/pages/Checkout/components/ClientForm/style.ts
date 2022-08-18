@@ -3,6 +3,13 @@ import styled from 'styled-components'
 export const ClientInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  .error-message {
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    color: ${(props) => props.theme.danger};
+    font-size: 1.2rem;
+  }
 `
 
 const ClientFormBoxHeader = styled.div`
@@ -33,7 +40,7 @@ const ClientFormBox = styled.div`
 export const AdressBox = styled(ClientFormBox)``
 
 export const AddressHeader = styled(ClientFormBoxHeader)`
-  & > svg {
+  > svg {
     color: ${(props) => props.theme['yellow-600']};
   }
 `
@@ -48,54 +55,33 @@ export const InputsWrapper = styled.div`
     'bairro cidade uf';
   gap: 1.6rem 1.2rem;
 
-  & > input {
-    padding: 1.2rem;
-    border-radius: 4px;
-    background-color: ${(props) => props.theme['base-input']};
-    border: 1px solid transparent;
-    color: ${(props) => props.theme['base-text']};
-    font-size: 1.4rem;
-    line-height: 1.3;
-  }
-
-  & > input:focus {
-    border-color: ${(props) => props.theme['yellow-600']};
-  }
-
   #cep {
     grid-area: cep;
-    width: 100%;
   }
   #rua {
     grid-area: rua;
-    width: 100%;
   }
   #numero {
     grid-area: numero;
-    width: 100%;
   }
   #complemento {
     grid-area: complemento;
-    width: 100%;
   }
   #bairro {
     grid-area: bairro;
-    width: 100%;
   }
   #cidade {
     grid-area: cidade;
-    width: 100%;
   }
   #uf {
     grid-area: uf;
-    width: 100%;
   }
 `
 
 export const PaymentBox = styled(ClientFormBox)``
 
 export const PaymentHeader = styled(ClientFormBoxHeader)`
-  & > svg {
+  > svg {
     color: ${(props) => props.theme['purple-600']};
   }
 `
@@ -105,7 +91,11 @@ export const PaymentContent = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1.2rem;
 
-  & > button {
+  > input {
+    display: none;
+  }
+
+  > label {
     display: flex;
     align-items: center;
     gap: 1.2rem;
@@ -116,16 +106,43 @@ export const PaymentContent = styled.div`
     font-size: 1.2rem;
     line-height: 1.3;
     text-transform: uppercase;
+    border: 1px solid transparent;
     border-radius: 6px;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
     text-align: left;
     cursor: pointer;
+
+    :hover {
+      background-color: ${(props) => props.theme['base-hover']};
+    }
+
     svg {
       color: ${(props) => props.theme['purple-600']};
     }
   }
 
-  & > button:hover {
-    background-color: ${(props) => props.theme['base-hover']};
+  > input:checked + label {
+    background-color: ${(props) => props.theme['purple-100']};
+    border-color: ${(props) => props.theme['purple-300']};
+  }
+`
+
+export const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  > input {
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 4px;
+    background-color: ${(props) => props.theme['base-input']};
+    border: 1px solid transparent;
+    color: ${(props) => props.theme['base-text']};
+    font-size: 1.4rem;
+    line-height: 1.3;
+
+    :focus {
+      border-color: ${(props) => props.theme['yellow-600']};
+    }
   }
 `

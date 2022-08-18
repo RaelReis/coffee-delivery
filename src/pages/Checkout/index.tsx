@@ -6,16 +6,27 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import zod from 'zod'
 
 const purchaseValidationSchema = zod.object({
-  bairro: zod.string(),
-  cep: zod.string(),
-  cidade: zod.string(),
+  bairro: zod
+    .string()
+    .min(1, 'Digite um bairro válido')
+    .max(100, 'Bairro muito longo'),
+  cep: zod
+    .string()
+    .min(9, 'Digite um CEP válido')
+    .max(9, 'Digite um CEP válido'),
+  cidade: zod.string().min(1, 'Digite uma cidade válida'),
   complemento: zod.string(),
-  numero: zod.string().min(5, 'teste').max(10, 'teste'),
-  rua: zod.string(),
-  uf: zod.string(),
+  numero: zod
+    .number({ invalid_type_error: 'Digite um número válido' })
+    .min(1, 'Digite um número válido'),
+  rua: zod.string().min(1, 'Digite uma rua válida'),
+  uf: zod.string().min(1, 'Digite um UF válido'),
+  paymentMethod: zod.enum(['credit', 'debt', 'cash'], {
+    invalid_type_error: 'Selecione um método de pagamento',
+  }),
 })
 
-type PurchaseData = zod.infer<typeof purchaseValidationSchema>
+export type PurchaseData = zod.infer<typeof purchaseValidationSchema>
 
 export function Checkout() {
   const checkoutForm = useForm<PurchaseData>({
@@ -25,13 +36,12 @@ export function Checkout() {
       cep: '',
       cidade: '',
       complemento: '',
-      numero: '',
       rua: '',
       uf: '',
     },
   })
 
-  const { handleSubmit } = checkoutForm
+  const { handleSubmit, formState } = checkoutForm
 
   function onSubmit(data: PurchaseData) {
     console.log(data)
