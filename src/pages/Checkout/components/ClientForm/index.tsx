@@ -20,13 +20,13 @@ import InputMask from 'react-input-mask'
 import { useEffect } from 'react'
 import { useFormContext } from 'react-hook-form'
 import axios from 'axios'
-import { PurchaseData } from '../..'
+import { PurchaseValues } from '../..'
 
 export function ClientForm() {
-  const { register, watch, setValue, formState, clearErrors, setError } =
-    useFormContext<PurchaseData>()
+  const { register, watch, setValue, formState, clearErrors } =
+    useFormContext<PurchaseValues>()
 
-  const cep = watch('cep', '')
+  const cep = watch('cep')
 
   useEffect(() => {
     ;(async function () {
@@ -42,7 +42,7 @@ export function ClientForm() {
         clearErrors(['rua', 'bairro', 'cidade', 'uf'])
       }
     })()
-  }, [cep, setValue, setError, clearErrors])
+  }, [cep, setValue, clearErrors])
 
   const isCepValid = cep.length === 9
 
