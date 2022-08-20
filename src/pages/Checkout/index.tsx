@@ -1,12 +1,15 @@
-import zod from 'zod'
 import { FormProvider, useForm } from 'react-hook-form'
 import { CartInfo } from './components/CartInfo'
 import { ClientForm } from './components/ClientForm'
 import { CheckoutContainer } from './style'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { purchaseValidationSchema } from '../../schemas/zod/purchaseValidationSchema'
-
-export type PurchaseValues = zod.infer<typeof purchaseValidationSchema>
+import {
+  purchaseValidationSchema,
+  PurchaseValues,
+} from '../../schemas/zod/purchaseValidationSchema'
+import { useContext } from 'react'
+import { PurchaseContext } from '../../contexts/purchaseContext'
+import { useNavigate } from 'react-router-dom'
 
 export function Checkout() {
   const checkoutForm = useForm<PurchaseValues>({
@@ -22,10 +25,16 @@ export function Checkout() {
   })
 
   const { handleSubmit } = checkoutForm
+  const { addClientInfo, clearCart } = useContext(PurchaseContext)
+  const navigate = useNavigate()
 
   function onSubmit(data: PurchaseValues) {
-    console.log(data)
+    addClientInfo(data)
+    clearCart()
+    navigate('/success')
   }
+
+  console.count('render')
 
   return (
     <CheckoutContainer>

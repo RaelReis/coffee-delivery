@@ -25,9 +25,10 @@ export interface Coffee {
   imageUrl: string
   tags: Tags[]
   price: number
+  quantity: number
 }
 
-export const coffeeData = [
+export const coffeeList = [
   {
     id: '1',
     name: 'Expresso tradicional',

@@ -16,11 +16,11 @@ import {
   PaymentHeader,
 } from './style'
 
-import InputMask from 'react-input-mask'
-import { useEffect } from 'react'
-import { useFormContext } from 'react-hook-form'
 import axios from 'axios'
-import { PurchaseValues } from '../..'
+import { useEffect } from 'react'
+import InputMask from 'react-input-mask'
+import { useFormContext } from 'react-hook-form'
+import { PurchaseValues } from '../../../../schemas/zod/purchaseValidationSchema'
 
 export function ClientForm() {
   const { register, watch, setValue, formState, clearErrors } =
@@ -53,7 +53,7 @@ export function ClientForm() {
     numero: numeroError,
     rua: ruaError,
     uf: ufError,
-    paymentMethod: paymentError,
+    metodoPagamento: paymentError,
   } = formState.errors
 
   return (
@@ -70,6 +70,7 @@ export function ClientForm() {
         </AddressHeader>
         <InputsWrapper>
           <InputWrapper id="cep">
+            {/* Input mask is causing the Warning: findDOMNode is deprecated in StrictMode */}
             <InputMask
               mask="99999-999"
               type="text"
@@ -162,7 +163,7 @@ export function ClientForm() {
             type="radio"
             id="credit"
             value="credit"
-            {...register('paymentMethod')}
+            {...register('metodoPagamento')}
           />
           <label htmlFor="credit">
             <CreditCard size={25} />
@@ -172,7 +173,7 @@ export function ClientForm() {
             type="radio"
             id="debt"
             value="debt"
-            {...register('paymentMethod')}
+            {...register('metodoPagamento')}
           />
           <label htmlFor="debt">
             <Bank size={25} />
@@ -182,7 +183,7 @@ export function ClientForm() {
             type="radio"
             id="cash"
             value="cash"
-            {...register('paymentMethod')}
+            {...register('metodoPagamento')}
           />
           <label htmlFor="cash">
             <Money size={25} />

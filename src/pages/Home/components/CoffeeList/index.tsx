@@ -1,14 +1,14 @@
 import { CoffeeCard } from '../CoffeeCard'
 import { CoffeeListContainer, List } from './style'
-import { coffeeData } from '../../../../utils/coffeeData'
+import { coffeeList } from '../../../../utils/coffeeList'
 
 export function CoffeeList() {
   return (
     <CoffeeListContainer>
       <h2>Nossos cafés</h2>
       <List>
-        {coffeeData.map((coffee) => (
-          <CoffeeCard key={coffee.id} data={coffee} />
+        {coffeeList.map((coffee) => (
+          <CoffeeCard key={coffee.id} coffee={coffee} />
         ))}
       </List>
     </CoffeeListContainer>

@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { RequestProvider } from './contexts/requestContext'
+import { PruchaseProvider } from './contexts/purchaseContext'
 
 import { Router } from './Router'
 import { GlobalStyle } from './styles/globalStyle'
@@ -10,9 +10,9 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <RequestProvider>
+        <PruchaseProvider>
           <Router />
-        </RequestProvider>
+        </PruchaseProvider>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>

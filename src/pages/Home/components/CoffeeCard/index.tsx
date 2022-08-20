@@ -1,7 +1,7 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext, useState } from 'react'
-import { RequestContext } from '../../../../contexts/requestContext'
-import { Coffee } from '../../../../utils/coffeeData'
+import { PurchaseContext } from '../../../../contexts/purchaseContext'
+import { Coffee } from '../../../../utils/coffeeList'
 import {
   CoffeBuyBox,
   CoffeInfoBox,
@@ -11,13 +11,13 @@ import {
 } from './style'
 
 interface CoffeeCardProps {
-  data: Coffee
+  coffee: Coffee
 }
 
-export function CoffeeCard({ data }: CoffeeCardProps) {
+export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const [quantity, setQuantity] = useState(1)
 
-  const { updateCartFromCoffeeRequest } = useContext(RequestContext)
+  const { updateCartFromCoffeeRequest } = useContext(PurchaseContext)
 
   function imcrementQuantity() {
     quantity >= 1 && setQuantity((prev) => prev + 1)
@@ -28,22 +28,22 @@ export function CoffeeCard({ data }: CoffeeCardProps) {
   }
 
   function handleAddCoffee() {
-    updateCartFromCoffeeRequest(data, quantity)
+    updateCartFromCoffeeRequest({ ...coffee, quantity })
   }
 
   return (
     <ConfeeCardContainer>
-      <img src={data.imageUrl} alt={data.name} />
+      <img src={coffee.imageUrl} alt={coffee.name} />
 
       <CoffeInfoBox>
         <TagsWrapper>
-          {data.tags.map((tag) => (
+          {coffee.tags.map((tag) => (
             <span key={tag.id}>{tag.name}</span>
           ))}
         </TagsWrapper>
 
-        <h3>{data.name}</h3>
-        <p>{data.description}</p>
+        <h3>{coffee.name}</h3>
+        <p>{coffee.description}</p>
       </CoffeInfoBox>
 
       <CoffeBuyBox>

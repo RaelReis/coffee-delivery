@@ -1,9 +1,7 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { useContext } from 'react'
-import {
-  RequestCoffee,
-  RequestContext,
-} from '../../../../contexts/requestContext'
+import { PurchaseContext } from '../../../../contexts/purchaseContext'
+import { Coffee } from '../../../../utils/coffeeList'
 import {
   ButtonsWrapper,
   CoffeeCardOptions,
@@ -14,12 +12,11 @@ import {
 } from './style'
 
 interface CoffeeInfoCardProps {
-  request: RequestCoffee
+  coffee: Coffee
 }
 
-export function CoffeeInfoCard({ request }: CoffeeInfoCardProps) {
-  const { id, coffee, quantity } = request
-  const { updateItemQuantity, removeItemFromCart } = useContext(RequestContext)
+export function CoffeeInfoCard({ coffee }: CoffeeInfoCardProps) {
+  const { updateItemQuantity, removeItemFromCart } = useContext(PurchaseContext)
 
   const formatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -27,15 +24,15 @@ export function CoffeeInfoCard({ request }: CoffeeInfoCardProps) {
   }).format(coffee.price)
 
   function incrementQuantity() {
-    updateItemQuantity(coffee, quantity + 1)
+    updateItemQuantity(coffee.id, coffee.quantity + 1)
   }
 
   function decreasedQuantity() {
-    updateItemQuantity(coffee, quantity - 1)
+    updateItemQuantity(coffee.id, coffee.quantity - 1)
   }
 
   function removeItem() {
-    id && removeItemFromCart(id, coffee, quantity)
+    coffee.id && removeItemFromCart(coffee.id)
   }
 
   return (
@@ -45,15 +42,15 @@ export function CoffeeInfoCard({ request }: CoffeeInfoCardProps) {
         {coffee.name}
         <ButtonsWrapper>
           <QuantityBox>
-            <button onClick={decreasedQuantity}>
+            <button title="menos" type="button" onClick={decreasedQuantity}>
               <Minus size={15} weight="bold" />
             </button>
-            <QuantityNumber>{quantity}</QuantityNumber>
-            <button onClick={incrementQuantity}>
+            <QuantityNumber>{coffee.quantity}</QuantityNumber>
+            <button title="mais" type="button" onClick={incrementQuantity}>
               <Plus size={15} weight="bold" />
             </button>
           </QuantityBox>
-          <RemoveButton onClick={removeItem}>
+          <RemoveButton title="remover" type="button" onClick={removeItem}>
             <Trash size={20} />
             remover
           </RemoveButton>

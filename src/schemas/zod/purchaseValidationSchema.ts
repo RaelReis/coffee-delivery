@@ -22,7 +22,7 @@ export const purchaseValidationSchema = zod.object({
   numero: zod
     .number({ invalid_type_error: 'Digite um número válido' })
     .min(1, 'Digite um número válido'),
-  paymentMethod: zod.enum(['credit', 'debt', 'cash'], {
+  metodoPagamento: zod.enum(['credit', 'debt', 'cash'], {
     invalid_type_error: 'Selecione um método de pagamento',
   }),
   cep: zod.string().refine(
@@ -34,3 +34,7 @@ export const purchaseValidationSchema = zod.object({
     },
   ),
 })
+
+// Type
+
+export type PurchaseValues = zod.infer<typeof purchaseValidationSchema>

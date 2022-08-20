@@ -1,47 +1,43 @@
-import { Coffee } from '../../utils/coffeeData'
-import { v4 as uuid } from 'uuid'
+import { Coffee } from '../../utils/coffeeList'
 
-export const enum ActionTypes {
-  ADD_TO_CART = 'ADD_TO_CART',
-  UPDATE_QUANTITY = 'UPDATE_QUANTITY',
-  REMOVE_FROM_CART = 'REMOVE_FROM_CART',
+export const CartActionTypes = {
+  ADD_TO_CART: 'ADD_TO_CART',
+  UPDATE_QUANTITY: 'UPDATE_QUANTITY',
+  REMOVE_FROM_CART: 'REMOVE_FROM_CART',
+  CLEAR_CART: 'CLEAR_CART',
+} as const
+
+export function updateCartFromCoffeeRequestAction(coffee: Coffee) {
+  return {
+    type: CartActionTypes.ADD_TO_CART,
+    payload: {
+      coffee,
+    },
+  }
 }
 
-export function updateCartFromCoffeeRequestAction(
-  coffee: Coffee,
-  quantity: number,
-) {
+export function updateQuantityItemAction(id: string, quantity: number) {
   return {
-    type: ActionTypes.ADD_TO_CART,
+    type: CartActionTypes.UPDATE_QUANTITY,
     payload: {
-      id: uuid(),
-      coffee,
+      id,
       quantity,
     },
   }
 }
 
-export function updateQuantityItemAction(coffee: Coffee, quantity: number) {
+export function removeItemFromCartAction(id: string) {
   return {
-    type: ActionTypes.UPDATE_QUANTITY,
+    type: CartActionTypes.REMOVE_FROM_CART,
     payload: {
-      coffee,
-      quantity,
+      id,
     },
   }
 }
 
-export function removeItemFromCartAction(
-  requestId: string,
-  coffee: Coffee,
-  quantity: number,
-) {
+export function clearCartAction() {
   return {
-    type: ActionTypes.REMOVE_FROM_CART,
-    payload: {
-      id: requestId,
-      coffee,
-      quantity,
-    },
+    type: CartActionTypes.CLEAR_CART,
+    payload: {},
   }
 }

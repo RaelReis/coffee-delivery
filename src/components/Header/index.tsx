@@ -3,11 +3,11 @@ import { CartNumber, CartWrapper, HeaderBox, HeaderContainer } from './style'
 
 import logo from '../../assets/logo.svg'
 import { NavLink } from 'react-router-dom'
-import { RequestContext } from '../../contexts/requestContext'
+import { PurchaseContext } from '../../contexts/purchaseContext'
 import { useContext } from 'react'
 
 export function Header() {
-  const { cart } = useContext(RequestContext)
+  const { cart } = useContext(PurchaseContext)
 
   const cartTotalItems = cart.requests.reduce(
     (acc, curr) => acc + curr.quantity,

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { RequestContext } from '../../../../contexts/requestContext'
+import { PurchaseContext } from '../../../../contexts/purchaseContext'
 import { CoffeeInfoCard } from '../CoffeeInfoCard'
 import {
   CardInfoContainer,
@@ -14,7 +14,7 @@ import {
 const DELIVERY_PRICE = Math.random() * 10
 
 export function CartInfo() {
-  const { cart } = useContext(RequestContext)
+  const { cart } = useContext(PurchaseContext)
 
   const formatedCartTotalPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -39,8 +39,8 @@ export function CartInfo() {
         {cart.requests.length > 0 ? (
           <>
             <CartList>
-              {cart.requests.map((request) => (
-                <CoffeeInfoCard key={request.id} request={request} />
+              {cart.requests.map((coffee) => (
+                <CoffeeInfoCard key={coffee.id} coffee={coffee} />
               ))}
             </CartList>
             <PriceInfoBox>

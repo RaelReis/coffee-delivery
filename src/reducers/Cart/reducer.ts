@@ -1,41 +1,70 @@
-import { RequestCoffee, RequestCart } from '../../contexts/requestContext'
 import { produce } from 'immer'
 import { WritableDraft } from 'immer/dist/internal'
-import { ActionTypes } from './action'
+import { Coffee } from '../../utils/coffeeList'
+import { CartActionTypes } from './action'
 
-interface Action {
-  type: string
-  payload: RequestCoffee
+export const initialCartState = {
+  requests: [] as Coffee[],
+  total: 0,
 }
 
-function calcTotalPriceByItens(draft: WritableDraft<RequestCart>) {
+export type CartState = typeof initialCartState
+
+type CartAction =
+  | {
+      type: typeof CartActionTypes.ADD_TO_CART
+      payload: {
+        coffee: Coffee
+      }
+    }
+  | {
+      type: typeof CartActionTypes.REMOVE_FROM_CART
+      payload: {
+        id: string
+      }
+    }
+  | {
+      type: typeof CartActionTypes.UPDATE_QUANTITY
+      payload: {
+        id: string
+        quantity: number
+      }
+    }
+  | {
+      type: typeof CartActionTypes.CLEAR_CART
+      payload: {}
+    }
+
+// Utils functions
+function calcTotalPriceByItens(draft: WritableDraft<CartState>) {
   return draft.requests.reduce((total, coffee) => {
-    return (total += coffee.quantity * coffee.coffee.price)
+    return (total += coffee.quantity * coffee.price)
   }, 0)
 }
 
-export function cartReducer(state: RequestCart, action: Action) {
+export function cartReducer(state: CartState, action: CartAction) {
   switch (action.type) {
-    case ActionTypes.ADD_TO_CART: {
+    case CartActionTypes.ADD_TO_CART: {
+      console.log(action.payload)
       const alreadyAddedCoffeIndex = state.requests.findIndex(
-        (coffeeReq) => coffeeReq.coffee.id === action.payload.coffee.id,
+        (coffee) => coffee.id === action.payload.coffee.id,
       )
       return produce(state, (draft) => {
         if (alreadyAddedCoffeIndex > -1) {
           draft.requests[alreadyAddedCoffeIndex].quantity +=
-            action.payload.quantity
+            action.payload.coffee.quantity
           draft.total = calcTotalPriceByItens(draft)
           return
         }
 
-        draft.requests.push(action.payload)
+        draft.requests.push(action.payload.coffee)
         draft.total = calcTotalPriceByItens(draft)
       })
     }
-    case ActionTypes.UPDATE_QUANTITY: {
+    case CartActionTypes.UPDATE_QUANTITY: {
       return produce(state, (draft) => {
         const toUpdateItemIndex = draft.requests.findIndex(
-          (request) => request.coffee.id === action.payload.coffee.id,
+          (coffee) => coffee.id === action.payload.id,
         )
         if (toUpdateItemIndex > -1 && action.payload.quantity > 0) {
           draft.requests[toUpdateItemIndex].quantity = action.payload.quantity
@@ -43,7 +72,7 @@ export function cartReducer(state: RequestCart, action: Action) {
         }
       })
     }
-    case ActionTypes.REMOVE_FROM_CART: {
+    case CartActionTypes.REMOVE_FROM_CART: {
       return produce(state, (draft) => {
         draft.requests = draft.requests.filter(
           (request) => request.id !== action.payload.id,
@@ -51,6 +80,8 @@ export function cartReducer(state: RequestCart, action: Action) {
         draft.total = calcTotalPriceByItens(draft)
       })
     }
+    case CartActionTypes.CLEAR_CART:
+      return initialCartState
     default:
       return state
   }
