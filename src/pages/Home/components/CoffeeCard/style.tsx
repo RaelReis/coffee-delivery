@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ConfeeCardContainer = styled.div`
+export const ConfeeCardContainer = styled.li`
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -12,9 +12,11 @@ export const ConfeeCardContainer = styled.div`
   border-top-right-radius: 36px;
   border-bottom-left-radius: 36px;
   border-bottom-right-radius: 8px;
+  min-height: 30rem;
 
   img {
     max-width: 12rem;
+    height: auto;
     margin-top: -4.4rem;
   }
 `
@@ -40,6 +42,7 @@ export const CoffeInfoBox = styled.div`
     line-height: 1.4;
     color: ${(props) => props.theme['base-label']};
     text-align: center;
+    max-width: 25rem;
   }
 `
 

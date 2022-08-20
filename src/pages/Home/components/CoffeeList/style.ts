@@ -11,6 +11,10 @@ export const CoffeeListContainer = styled.section`
     line-height: 1.3;
     font-size: 3.2rem;
   }
+
+  @media (max-width: 500px) {
+    width: min(100% - 16rem);
+  }
 `
 
 export const List = styled.ul`
@@ -18,6 +22,11 @@ export const List = styled.ul`
   margin-top: 5.4rem;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 4rem 3.2rem;
+
+  @media (max-width: 760px) {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 2rem 1.6rem;
+  }
 `

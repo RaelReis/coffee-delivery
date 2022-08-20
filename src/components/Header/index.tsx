@@ -17,7 +17,7 @@ export function Header() {
   return (
     <HeaderContainer>
       <HeaderBox>
-        <NavLink to="/">
+        <NavLink title="home" to="/">
           <img src={logo} alt="" />
         </NavLink>
         <CartWrapper>
@@ -25,7 +25,7 @@ export function Header() {
             <MapPin size={25} weight="fill" />
             São Paulo, SP
           </span>
-          <NavLink to="checkout">
+          <NavLink title="checkout" to="checkout">
             {cartTotalItems > 0 && (
               <CartNumber key={cartTotalItems}>{cartTotalItems}</CartNumber>
             )}

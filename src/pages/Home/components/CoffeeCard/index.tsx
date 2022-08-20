@@ -1,7 +1,7 @@
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 import { useContext, useState } from 'react'
 import { PurchaseContext } from '../../../../contexts/purchaseContext'
-import { Coffee } from '../../../../utils/coffeeList'
+import { coffeeList } from '../../../../utils/coffeeList'
 import {
   CoffeBuyBox,
   CoffeInfoBox,
@@ -11,7 +11,7 @@ import {
 } from './style'
 
 interface CoffeeCardProps {
-  coffee: Coffee
+  coffee: typeof coffeeList[number]
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
@@ -51,15 +51,15 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           R$ <span>9,99</span>
         </span>
         <div>
-          <button onClick={decreaseQuantity}>
+          <button title="menos" onClick={decreaseQuantity}>
             <Minus size={15} weight="bold" />
           </button>
           <QuantityNumber>{quantity}</QuantityNumber>
-          <button onClick={imcrementQuantity}>
+          <button title="mais" onClick={imcrementQuantity}>
             <Plus size={15} weight="bold" />
           </button>
         </div>
-        <button onClick={handleAddCoffee}>
+        <button title="adicionar ao carrinho" onClick={handleAddCoffee}>
           <ShoppingCart size={25} weight="fill" />
         </button>
       </CoffeBuyBox>

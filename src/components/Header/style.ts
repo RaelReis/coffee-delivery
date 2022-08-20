@@ -32,6 +32,10 @@ export const HeaderBox = styled.div`
   img {
     width: 8rem;
   }
+
+  @media (max-width: 600px) {
+    width: calc(100% - 8rem);
+  }
 `
 
 export const CartWrapper = styled.div`

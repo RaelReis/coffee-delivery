@@ -16,6 +16,15 @@ export const BannerContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 825px) {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  @media (max-width: 500px) {
+    width: min(100% - 16rem);
+  }
 `
 
 export const BannerInfo = styled.div`

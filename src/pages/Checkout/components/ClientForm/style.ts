@@ -45,6 +45,7 @@ export const AddressHeader = styled(ClientFormBoxHeader)`
   }
 `
 export const InputsWrapper = styled.div`
+  width: 100%;
   margin-top: 3.2rem;
   display: grid;
   grid-template-columns: 3fr 4fr 1fr;

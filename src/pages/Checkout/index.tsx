@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react'
 import { PurchaseContext } from '../../contexts/purchaseContext'
 import { useNavigate } from 'react-router-dom'
+import { DefaultContainer } from '../../layout/DefaultContainer'
 
 export function Checkout() {
   const checkoutForm = useForm<PurchaseValues>({
@@ -37,13 +38,15 @@ export function Checkout() {
   console.count('render')
 
   return (
-    <CheckoutContainer>
-      <FormProvider {...checkoutForm}>
-        <form action="/" onSubmit={handleSubmit(onSubmit)}>
-          <ClientForm />
-          <CartInfo />
-        </form>
-      </FormProvider>
-    </CheckoutContainer>
+    <DefaultContainer>
+      <CheckoutContainer>
+        <FormProvider {...checkoutForm}>
+          <form action="/" onSubmit={handleSubmit(onSubmit)}>
+            <ClientForm />
+            <CartInfo />
+          </form>
+        </FormProvider>
+      </CheckoutContainer>
+    </DefaultContainer>
   )
 }

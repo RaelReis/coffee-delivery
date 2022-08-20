@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
 export const SuccessContainer = styled.div`
-  width: min(100% - 32rem);
-  margin: 11rem 0;
-  flex: 1;
-  margin-inline: auto;
-
   header {
     margin-top: 8rem;
 
@@ -25,11 +20,12 @@ export const SuccessContainer = styled.div`
 
   .success-banner {
     margin-top: 4rem;
-    display: flex;
-    justify-content: space-between;
-    gap: 10rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-gap: 4rem 3.2rem;
 
     .order-info {
+      width: calc(100% - 4rem);
       flex: 1;
       padding: 4rem;
       background: linear-gradient(#fff, #fff) padding-box,
@@ -50,6 +46,7 @@ export const SuccessContainer = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      gap: 3.2rem;
 
       .order-item {
         display: flex;
@@ -100,6 +97,10 @@ export const SuccessContainer = styled.div`
     }
     img {
       flex: 1;
+      margin: auto;
+      max-width: 50rem;
+      width: 100%;
+      height: auto;
     }
   }
 `

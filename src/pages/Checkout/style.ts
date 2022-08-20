@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 
 export const CheckoutContainer = styled.div`
-  margin: 11rem 0;
-
-  flex: 1;
   display: flex;
   align-items: flex-start;
   gap: 3.2rem;
 
   form {
     margin-top: 4rem;
-    width: calc(100% - 32rem);
-    margin-inline: auto;
 
     display: flex;
     align-items: flex-start;
     gap: 3.2rem;
+
+    @media (max-width: 1332px) {
+      flex-direction: column-reverse;
+      gap: 1.6rem;
+    }
 
     h2 {
       font-family: 'Baloo 2', cursive;
